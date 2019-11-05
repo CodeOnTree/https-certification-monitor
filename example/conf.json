@@ -1,0 +1,19 @@
+{
+    "before_end_day" : 14,
+    "domain_data" : [
+        {
+            "domain" : "www.baidu.com",
+            "port" : "443",
+            "remark" : "百度"
+        }
+    ],
+    "email" : {
+        "smtp_host" : "smtp.qq.com",
+        "smtp_port" : 465,
+        "username" : "your_mail",
+        "password" : "your_password",
+        "recipients" : [
+            "receitor@mail.com"
+        ]
+    }
+}

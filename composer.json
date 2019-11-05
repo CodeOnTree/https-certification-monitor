@@ -1,0 +1,28 @@
+{
+    "name" : "treeutil/https-certification-monitor",
+    "license" : "Apache-2.0",
+    "keywords" : [
+        "php",
+        "openssl",
+        "https"
+    ],
+    "require" : {
+        "php": ">=7.1",
+        "phpmailer/phpmailer": "^6.1"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "Tree\\Util\\" : "src"
+        }
+    },
+    "config" : {
+        "optimize-autoloader" : true,
+        "sort-packages" : true
+    },
+    "repositories" : {
+        "packagist" : {
+            "type" : "composer",
+            "url" : "https://mirrors.aliyun.com/composer/"
+        }
+    }
+}
