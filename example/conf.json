@@ -10,6 +10,7 @@
     "email" : {
         "smtp_host" : "smtp.qq.com",
         "smtp_port" : 465,
+        "title": "domain check report",
         "username" : "your_mail",
         "password" : "your_password",
         "recipients" : [

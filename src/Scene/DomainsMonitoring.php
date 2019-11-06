@@ -123,7 +123,7 @@ class DomainsMonitoring {
         foreach ($this->config->email->recipients as $recipient) {
             $mail->addAddress($recipient);
         }
-        $mail->Subject = "domain remind";
+        $mail->Subject = $this->config->email->title;
         $mail->Body = $body;
         if (! $mail->send()) {
             throw new SendEMailErrorException($mail->ErrorInfo);
