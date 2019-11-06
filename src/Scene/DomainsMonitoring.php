@@ -15,8 +15,10 @@ class DomainsMonitoring {
         $this->config = json_decode(file_get_contents($filename));
     }
     public function doMonitor() {
-        $data = $data_die = $data_bottom = $data_middle = $data_top = [];
+        $data_die = $data_bottom = $data_middle = $data_top = [];
+        $count = 0;
         foreach ($this->config->domain_data as $domain_data) {
+            $count++;
             try {
                 $monitor = new Monitor($domain_data->domain, $domain_data->port ?? 443);
             } catch (InvalidDomainForPingException $e) {
@@ -43,7 +45,7 @@ class DomainsMonitoring {
             $span = $monitor->getValiditySpan();
             $remind_time = strtotime(date('Y-m-d', time())) + ($this->config->before_end_day ?? 7) * 86400;
             if ($span['to'] < $remind_time) {
-                $data_middle[] = [
+                $data_middle[$span['to'] . '_' . $count] = [
                     'domain' => $domain_data->domain,
                     'remark' => $domain_data->remark ?? null,
                     'domain_is_available' => true,
@@ -52,7 +54,7 @@ class DomainsMonitoring {
                     'expire_date' => date('Y-m-d', $span['to'])
                 ];
             } else {
-                $data_top[] = [
+                $data_top[$span['to'] . '_' . $count] = [
                     'domain' => $domain_data->domain,
                     'remark' => $domain_data->remark ?? null,
                     'domain_is_available' => true,
@@ -62,6 +64,10 @@ class DomainsMonitoring {
                 ];
             }
         }
+        krsort($data_middle);
+        $data_middle = array_values($data_middle);
+        krsort($data_top);
+        $data_top = array_values($data_top);
         $data = array_merge($data_top, $data_middle, $data_bottom, $data_die);
         return $data;
     }
